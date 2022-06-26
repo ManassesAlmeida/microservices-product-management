@@ -1,0 +1,48 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /payment
+
+spring:
+  application:
+    name: payment
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  jmx:
+    enabled: false
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:file:~/h2/payment
+    username: h2
+    password: 
+    driver-class-name: org.h2.Driver
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+
+security:
+  jwt:
+    token:
+      secret-key: key-microservice
+
+crud:
+  rabbitmq:
+    exchange: crud.exchange
+    queue: crud.product.queue
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/registry/eureka
